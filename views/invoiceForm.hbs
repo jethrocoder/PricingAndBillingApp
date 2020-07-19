@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/invoiceForm.css">
+        <link href="/invoice.css" rel="stylesheet">
+
+    <!-- JS, Popper.js, and jQuery -->
+   <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>   
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="/invoiceForm.js"></script>  
+    <script src="/myInvoiceForm.js"></script>
+     <script src="/generate_invoice_api.js"></script>
+        <script src="/invoice.js"></script>
+
+  
+
+  <style>
+    @media print {
+    .noprint {
+        visibility: hidden;
+    }
+  </style>
+  
+    <title>INVOICE FORM</title>
+</head>
+<body>
+<div id="container" class="invoiceForm">
+ 
+  <span class="input">
+    <input type="text" class="input__field" id="date" />
+    <label for="date" class="input__label">
+      <span class="input__label-content">Date</span>
+  </label>
+  </span>
+
+
+<select class="form-control mySelect" id="state">
+    <option value="Delhi">Delhi / New Delhi</option>
+    <option value="Others">Others</option>
+</select>
+
+  <span class="input">
+    <input type="text" class="input__field" id="billed_to" />
+    <label for="billed_to" class="input__label">
+      <span class="input__label-content">Billed To</span>
+    </label>
+  </span>
+
+  <span class="input">
+    <input type="text" class="input__field" id="billed_to_gst" />
+    <label for="billed_to_gst" class="input__label">
+      <span class="input__label-content">GST IN</span>
+    </label>
+  </span>
+
+  <span class="input">
+    <input type="text" class="input__field" id="supplied_to" />
+    <label for="supplied_to" class="input__label">
+      <span class="input__label-content">Supplied To</span>
+    </label>
+  </span>
+
+<span class="input">
+    <input type="text" class="input__field" id="supplied_to_gst" />
+    <label for="supplied_to_gst" class="input__label">
+      <span class="input__label-content">GST IN</span>
+    </label>
+  </span>
+
+  <span class="input message">
+    <div id="invoiceTable">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Specific Code</th>
+            <th scope="col">Quantity</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="invoice_table">
+            <tr>
+              <td><input id="specific_code"></td>
+              <td><input id="quantity"></td>
+              <td><button type="button" id="addBtn" class="btn btn-success" disabled>Add</button></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </span>
+  <button id="send-button" type="button">Generate Invoice</button>
+
+</div>
+
+<div class="container"></div>
+  <div id="result"></div>
+
+
+</body>
+</html>

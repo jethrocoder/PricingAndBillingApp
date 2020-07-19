@@ -1,0 +1,26 @@
+.h3_style{
+    display: inline-block;
+    margin-left: 300px;
+}
+
+@media print {
+    .noprint {
+        visibility: hidden;
+    }
+  
+    }
+.myBtn{
+    width: 100%;
+}
+
+#myTable{
+    margin-left:10px;
+}
+
+#myTable td{
+    border:1px solid black
+}
+
+#myTable th{
+    border:1px solid black
+}
