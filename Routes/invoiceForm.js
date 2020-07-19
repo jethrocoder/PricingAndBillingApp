@@ -10,11 +10,17 @@ route.post('/invoiceForm/generateInvoice',async (req,res)=>{
     let table=[]
     let x,y,z,subtotal,cgst,sgst,igst,total,grand_total
     x=y=z=subtotal=cgst=sgst=igst=total=grand_total=0
+
     for(let index in specific_codes){
         let specific_code=specific_codes[index]
         let quantity=quantities[index]
+
         let row=await pricing_and_codification_chart.findOne({where:{specific_code:specific_code}})
-        .catch((err)=>{console.error(err)})
+
+        if(row==null){
+            return res.send({invalid_specific_code:true})
+        }
+
         let name_of_item=row.name_of_item
         let hsn_code=row.hsn_code
         let basic_sale_price=row.basic_sale_price
@@ -58,7 +64,6 @@ route.post('/invoiceForm/generateInvoice',async (req,res)=>{
     let tax_and_total={
         x,y,z,subtotal,cgst,sgst,igst,total,grand_total,
     }
-    console.log({table,tax_and_total,add_info})
     res.send({table,tax_and_total,add_info})
 })
 

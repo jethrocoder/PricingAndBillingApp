@@ -21,12 +21,31 @@ $(()=>{
         let quantity=$('#quantity').val()
         specific_codes.push(specific_code)
         quantities.push(quantity)
-        let new_row=$(`<tr><td>${specific_code}</td><td>${quantity}</td><td></td></tr>`)
-        invoice_table.append(new_row)
+        let new_row=$(`<tr><td>${specific_code}</td><td>${quantity}</td></tr>`)
+        let delBtn=$(`<button type="button" class="btn btn-danger m-1 ml-2" >Delete</button>`)
+        new_row.append(delBtn)
+        delBtn.click(()=>{
+            let ind=-1
+            for(let i in specific_codes){
+                if(specific_codes[i]==new_row.children()[0].textContent && 
+                quantities[i]==new_row.children()[1].textContent){
+                    ind=i
+                    break
+                }
+            }
+         
+            specific_codes.splice(ind,1)
+            quantities.splice(ind,1)
+            new_row.remove()
+        })
+       
+        invoice_table.prepend(new_row)
         $('#specific_code').val("")
         $('#quantity').val("")
         
     })
+
+   
 
     sendBtn.click(()=>{
         const date=$('#date').val();
@@ -51,6 +70,10 @@ $(()=>{
         }
 
         $.post('/api/invoiceForm/generateInvoice',{specific_codes,quantities,add_info},(data)=>{
+            if(data.invalid_specific_code==true){
+                alert('Invalid specific code')
+                return;
+            }
             $('#result').append(renderInvoice(data))
         })
     })

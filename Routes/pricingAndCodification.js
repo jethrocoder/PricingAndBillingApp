@@ -38,6 +38,13 @@ route.post('/pricingAndCodificationChart/post', async (req,res)=>{
     quantity_sold=parseInt(quantity_sold)
     net_stock_balance=parseInt(net_stock_balance)
 
+    if(isNaN(hsn_code) || isNaN(purchase_rate) ||isNaN(cost_multiply_factor) ||
+    isNaN(p_and_f_charges) || isNaN(gst_quotient) || isNaN(previous_stock) ||
+    isNaN(current_supply) || isNaN(quantity_sold) ||isNaN(net_stock_balance)
+    ||isNaN(gst_percent)){
+        return res.send({data_format_incorrect:true})
+     }
+
     let addon_charge,purchase_cost,tentative_sale_price,gst_per_unit;
     let discount_price,basic_sale_price,total_sale_price,current_stock;
 
@@ -85,7 +92,6 @@ route.post('/pricingAndCodificationChart/post', async (req,res)=>{
 route.get('/pricingAndCodificationChart/delete/:specific_code', async (req,res)=>{
 
     let specific_code=req.params.specific_code
-    console.log(specific_code)
     await pricing_and_codification_chart.findOne({where:{specific_code:specific_code}})
     .then(async (data)=>{
         await data.destroy()

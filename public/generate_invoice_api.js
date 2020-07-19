@@ -1,13 +1,14 @@
     function renderInvoice(data){
       $('.invoiceForm').html('')
     const {table,tax_and_total,add_info}= data
-
-      let table_body='';
+    let srNo=1;
+  
+    let table_body='';
     for(let row of table){
       table_body+=
       `
     <tr>
-    <th scope="row">#</th>
+    <th scope="row">${srNo++}</th>
     <td>${row.name_of_item}</td>
     <td>${row.specific_code}</td>
     <td>${row.quantity}</td>
@@ -25,8 +26,6 @@
   }
 
 let invoice= `
-<link href="invoice.css" rel="stylesheet">
-<script src="invoice.js"></script>
 <div class="container">
     <div class="row invoice-header px-3 py-2">
         <h3 class="text-center col-12">CASH/TAX INVOICE</h3>
@@ -41,14 +40,13 @@ let invoice= `
   
     <div class="invoice-content row px-5 pt-5">
       <div class="col-3">
-        <h5 class="almost-gray mb-3">Invoice No:</h5>
+        <h5 class="almost-gray mb-3">Invoice No:987897</h5>
         <h5 class="almost-gray mb-3">Billed To:</h5>
         <p class="gray-ish">${add_info.billed_to}</p>
         <p class="gray-ish">GST IN:${add_info.billed_to_gst}</p>
       </div>
       <div class="col-5 text-center">
-        <h5 class="almost-gray">Date of Issue:</h5>
-        <p class="gray-ish">${add_info.date}</p>
+        <h5 class="almost-gray">Date of Issue:${add_info.date}</h5>
   
       </div>
       <div class="col-4 text-left total-field">
@@ -61,7 +59,7 @@ let invoice= `
   
     <div class="row mt-5">
       <div class="col-10 pt-1">
-        <table class="table">
+        <table class="table" id="invoiceItemTable">
               <thead class="">
                 <tr>
                   <th scope="col gray-ish">Sr. No.</th>
@@ -151,7 +149,7 @@ let invoice= `
             </table>
           </div>
      </div>
-    <p class="text-center pb-3"><em> Taxes will be calculated in &euro; regarding transport and other taxable services.</em></p>
+    <p class="text-center pb-3"><em> Taxes will be calculated in &#8377 regarding transport and other taxable services.</em></p>
   </div>
 
 `

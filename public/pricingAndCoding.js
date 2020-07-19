@@ -16,6 +16,17 @@ $(()=>{
     let quantity_sold=$('#quantity_sold')
     let net_stock_balance=$('#net_stock_balance')
     addBtn.click(()=>{
+            let incomplete=false
+            if(supplier_info.val()=='' || name_of_item.val()=='' || hsn_code.val()==''
+            || gst_percent.val()=='' || specific_code.val()=='' || cost_multiply_factor.val()=='' ||
+            p_and_f_charges.val()=='' || gst_quotient.val()=='' || discount_percent.val()==''
+            || previous_stock.val()=='' || current_supply.val()=='' || quantity_sold.val()=='' ||
+            net_stock_balance.val()=='' || purchase_rate.val()==''){
+                window.alert('Data insufficient')
+                incomplete=true
+            }
+            if(incomplete){return }
+
             $.post('/api/pricingAndCodificationChart/post',{
             supplier_info:supplier_info.val(),
             name_of_item:name_of_item.val(),
@@ -32,6 +43,10 @@ $(()=>{
             net_stock_balance:net_stock_balance.val(),
             purchase_rate:purchase_rate.val()
         },(data)=>{
+            if(data.data_format_incorrect==true)    {
+                alert('Data format is incorrect')
+                return
+            }
             supplier_info.val("")
             name_of_item.val("")
             hsn_code.val("")
