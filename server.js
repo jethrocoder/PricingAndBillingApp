@@ -13,7 +13,7 @@ app.set('view engine','hbs')
 app.use('/api',pricingAndCodificationRoute)
 app.use('/api',invoiceRoute)
 
-const PORT=process.env.PORT | 4444
+const PORT=process.env.PORT || 4444
 db.sync()
 .then(()=>{
     console.log('Database Synced')
