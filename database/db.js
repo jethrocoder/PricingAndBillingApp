@@ -1,11 +1,8 @@
 const Sequelize= require('sequelize')
 
 const db=new Sequelize({
-    host:'localhost',
-    username:'zahoorAnwar',
-    password:'zaidi7412bijnor',
-    dialect:'mysql',
-    database:'pricing'
+    dialect:'sqlite',
+    storage:__dirname+'/chartData.db'
 })
 
 const invoice_chart=db.define('invoice_chart',{
